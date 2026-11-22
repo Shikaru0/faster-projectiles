@@ -1,6 +1,7 @@
 package name.modid.client.mixin;
 
 import name.modid.client.FastUseTracker;
+import name.modid.client.FasterProjectilesClient;
 import name.modid.client.ProjectileUtils;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
@@ -19,7 +20,9 @@ public class ItemMixin {
 
     @Inject(at = @At("HEAD"), method = "releaseUsing")
     private void release(ItemStack stack, Level level, LivingEntity livingEntity, int remainingUseTicks, CallbackInfoReturnable<Boolean> cir) {
-        log.info("released({}, {}, {}, {}, {})", stack, level, livingEntity, remainingUseTicks, cir);
+        if (FasterProjectilesClient.shouldLog) {
+            log.info("released({}, {}, {}, {}, {})", stack, level, livingEntity, remainingUseTicks, cir);
+        }
 
         if (ProjectileUtils.isProjectileItem(stack)) {
             FastUseTracker.consumeRelease();
@@ -29,7 +32,9 @@ public class ItemMixin {
 
     @Inject(at = @At("HEAD"), method = "onUseTick")
     private void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseTicks, CallbackInfo ci) {
-        log.info("onUseTick({}, {}, {}, {}, {})", level, livingEntity, stack, remainingUseTicks, ci);
+        if (FasterProjectilesClient.shouldLog) {
+            log.info("onUseTick({}, {}, {}, {}, {})", level, livingEntity, stack, remainingUseTicks, ci);
+        }
         Item item = stack.getItem();
         if (item != Items.EXPERIENCE_BOTTLE) {
             if (item instanceof BowItem || item instanceof CrossbowItem || item instanceof TridentItem) {

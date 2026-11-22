@@ -9,7 +9,9 @@ public class ProjectileUtils {
 
     public static boolean isProjectileItem(ItemStack stack) {
         if (stack.isEmpty()) {
-            log.info("isProjectileItem returned false: stack {} was empty", stack);
+            if (FasterProjectilesClient.shouldLog) {
+                log.info("isProjectileItem returned false: stack {} was empty", stack);
+            }
             return false;
         } else {
             Item item = stack.getItem();

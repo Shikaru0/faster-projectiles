@@ -1,6 +1,7 @@
 package name.modid.client.mixin;
 
 import name.modid.client.FastUseTracker;
+import name.modid.client.FasterProjectilesClient;
 import name.modid.client.ProjectileUtils;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -26,7 +27,9 @@ public class GameRendererMixin {
 
     @Inject(at = @At("HEAD"), method = "render")
     private void render(DeltaTracker deltaTracker, boolean tick, CallbackInfo info) {
-        log.info("render({}, {}, {})", deltaTracker, tick, info);
+        if (FasterProjectilesClient.shouldLog) {
+            log.info("render({}, {}, {})", deltaTracker, tick, info);
+        }
         if (this.minecraft.player != null && this.minecraft.level != null) {
             Player player = this.minecraft.player;
             if (FastUseTracker.rightMousePressed) {
@@ -35,7 +38,9 @@ public class GameRendererMixin {
                     if (!player.isUsingItem()) {
                         assert this.minecraft.gameMode != null;
                         this.minecraft.gameMode.useItem(player, InteractionHand.OFF_HAND);
-                        log.info("useItem({}, {})", player, InteractionHand.OFF_HAND);
+                        if (FasterProjectilesClient.shouldLog) {
+                            log.info("useItem({}, {})", player, InteractionHand.OFF_HAND);
+                        }
                     }
 
                     FastUseTracker.consumePress();
@@ -48,7 +53,9 @@ public class GameRendererMixin {
                     if (ProjectileUtils.isProjectileItem(active)) {
                         assert this.minecraft.gameMode != null;
                         this.minecraft.gameMode.releaseUsingItem(player);
-                        log.info("releaseUsingItem({})", player);
+                        if (FasterProjectilesClient.shouldLog) {
+                            log.info("releaseUsingItem({})", player);
+                        }
                     }
                 }
 
