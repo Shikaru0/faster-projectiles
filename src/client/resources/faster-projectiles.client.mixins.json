@@ -3,7 +3,11 @@
 	"package": "name.modid.client.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
-		"ExampleClientMixin"
+		"ExampleClientMixin",
+		"WindowAccessor",
+		"MouseHandlerMixin",
+		"ItemMixin",
+		"GameRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
