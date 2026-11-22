@@ -3,15 +3,15 @@
 	"id": "faster-projectiles",
 	"version": "${version}",
 	"name": "faster-projectiles",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Faster projectiles!",
 	"authors": [
-		"Me!"
+		"Shikaru0"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/Shikaru0",
+		"sources": "https://github.com/Shikaru0/faster-projectiles/tree/fabric-26.1.2"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/faster-projectiles/icon.png",
 	"environment": "*",
 	"entrypoints": {
